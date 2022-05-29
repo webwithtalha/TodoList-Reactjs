@@ -8,14 +8,16 @@ import Login from "./pages/Login";
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Addtask />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Router>
-      <ToastContainer />
+      <div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Addtask />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </Router>
+        <ToastContainer />
+      </div>
     </>
   );
 }
