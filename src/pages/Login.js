@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+// import { useDispatch } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  // const dispatch = useDispatch();
   const router = useNavigate();
   const [login, setLogin] = useState({
     email: "",
@@ -16,6 +18,7 @@ const Login = () => {
 
       .then((jsonRes) => {
         setLogin(jsonRes.data.user);
+
         setLogin((prev) => {
           return {
             ...prev,

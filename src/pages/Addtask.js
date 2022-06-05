@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const Addtask = () => {
-  const router = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
@@ -49,18 +48,10 @@ const Addtask = () => {
     }
   };
 
-  const logoutUser = async (id) => {
-    try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`);
-      router("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div>
-      <div className="flex mx-10 md:flex-row xs:flex-col gap-3 items-center justify-center mt-[5%]">
+    <div className="w-full h-full">
+      <Header />
+      <div className="flex mx-10 md:flex-row xs:flex-col gap-3 items-center justify-center mt-10">
         <input
           onChange={(event) => {
             setNewTask(event.target.value);
@@ -74,12 +65,6 @@ const Addtask = () => {
           className="py-[11px] px-5 flex bg-brand-4 w-fit text-sm text-white font-poppins rounded-lg"
         >
           Add Task
-        </button>
-        <button
-          onClick={logoutUser}
-          className="py-[11px] px-5 flex bg-brand-4 w-fit text-sm text-white font-poppins rounded-lg"
-        >
-          Logout
         </button>
       </div>
       <div className="flex items-center justify-center mt-[3%]">
