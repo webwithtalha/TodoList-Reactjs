@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { login as loginAction } from "../features/userSlice";
 
 const Login = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const router = useNavigate();
   const [login, setLogin] = useState({
     email: "",
@@ -17,23 +18,12 @@ const Login = () => {
       .post(`${process.env.REACT_APP_API_URL}/api/loginUser`, login)
 
       .then((jsonRes) => {
-        setLogin(jsonRes.data.user);
+        dispatch(loginAction(jsonRes.data));
 
         setLogin((prev) => {
           return {
             ...prev,
-            username: "",
-          };
-        });
-        setLogin((prev) => {
-          return {
-            ...prev,
             email: "",
-          };
-        });
-        setLogin((prev) => {
-          return {
-            ...prev,
             password: "",
           };
         });
