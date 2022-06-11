@@ -1,14 +1,15 @@
-import React from "react";
-import { BiLogOutCircle } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React from 'react';
+import { BiLogOutCircle } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Header = () => {
   const router = useNavigate();
-  const logoutUser = async (id) => {
+  const logoutUser = async () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`);
-      router("/login");
+      localStorage.removeItem('token');
+      router('/login');
     } catch (error) {
       console.log(error);
     }
@@ -45,10 +46,7 @@ const Header = () => {
                   </a>
                 </li>
               </ul>
-              <div
-                title="logout"
-                className="hidden xl:flex items-center space-x-5"
-              >
+              <div title="logout" className="hidden xl:flex items-center space-x-5">
                 <BiLogOutCircle onClick={logoutUser} className="text-[25px]" />
               </div>
             </div>
@@ -59,12 +57,11 @@ const Header = () => {
                 className="h-6 w-6 hover:text-gray-200"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                stroke="currentColor">
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>

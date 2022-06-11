@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
-import { login as loginAction } from "../features/userSlice";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { login as loginAction } from '../features/userSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
   const router = useNavigate();
   const [login, setLogin] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: ''
   });
 
   const loggedIn = () => {
@@ -18,23 +18,24 @@ const Login = () => {
       .post(`${process.env.REACT_APP_API_URL}/api/loginUser`, login)
 
       .then((jsonRes) => {
+        localStorage.setItem('token', jsonRes.data.token);
         dispatch(loginAction(jsonRes.data));
 
         setLogin((prev) => {
           return {
             ...prev,
-            email: "",
-            password: "",
+            email: '',
+            password: ''
           };
         });
-        router("/");
+        router('/');
       })
       .catch((error) => {
         console.log(error.response);
-        toast.warning(error.response.data.message || "Something went wrong!", {
-          theme: "dark",
-          position: "top-right",
-          autoClose: 5000,
+        toast.warning(error.response.data.message || 'Something went wrong!', {
+          theme: 'dark',
+          position: 'top-right',
+          autoClose: 5000
         });
       });
   };
@@ -51,7 +52,7 @@ const Login = () => {
               setLogin((prev) => {
                 return {
                   ...prev,
-                  email: event.target.value,
+                  email: event.target.value
                 };
               });
             }}
@@ -67,7 +68,7 @@ const Login = () => {
               setLogin((prev) => {
                 return {
                   ...prev,
-                  password: event.target.value,
+                  password: event.target.value
                 };
               });
             }}
@@ -79,8 +80,7 @@ const Login = () => {
 
           <button
             onClick={loggedIn}
-            className="w-full text-center py-3 rounded bg-brand-3 text-white hover:bg-green-dark focus:outline-none my-1"
-          >
+            className="w-full text-center py-3 rounded bg-brand-3 text-white hover:bg-green-dark focus:outline-none my-1">
             Log in
           </button>
         </div>

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const router = useNavigate();
   const [signUp, setSignUp] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: ''
   });
 
   const createAccount = () => {
@@ -19,44 +19,41 @@ const Signup = () => {
         setSignUp((prev) => {
           return {
             ...prev,
-            name: "",
+            name: ''
           };
         });
         setSignUp((prev) => {
           return {
             ...prev,
-            email: "",
+            email: ''
           };
         });
         setSignUp((prev) => {
           return {
             ...prev,
-            password: "",
+            password: ''
           };
         });
-        router("/login");
-        toast.success("Signup Successfully", {
-          theme: "dark",
-          position: "bottom-right",
-          autoClose: 5000,
+        router('/login');
+        toast.success('Signup Successfully', {
+          theme: 'dark',
+          position: 'bottom-right',
+          autoClose: 5000
         });
       })
       .catch((error) => {
         console.log(error.response);
-        if (error.response.data.message === "user already exists") {
-          toast.warning(
-            error.response.data.message || "Something went wrong!",
-            {
-              theme: "dark",
-              position: "top-right",
-              autoClose: 5000,
-            }
-          );
+        if (error.response.data.message === 'user already exists') {
+          toast.warning(error.response.data.message || 'Something went wrong!', {
+            theme: 'dark',
+            position: 'top-right',
+            autoClose: 5000
+          });
         } else {
-          toast.error(error.response.data.message || "Something went wrong!", {
-            theme: "dark",
-            position: "bottom-right",
-            autoClose: 5000,
+          toast.error(error.response.data.message || 'Something went wrong!', {
+            theme: 'dark',
+            position: 'bottom-right',
+            autoClose: 5000
           });
         }
       });
@@ -73,7 +70,7 @@ const Signup = () => {
               setSignUp((prev) => {
                 return {
                   ...prev,
-                  name: event.target.value,
+                  name: event.target.value
                 };
               });
             }}
@@ -89,7 +86,7 @@ const Signup = () => {
               setSignUp((prev) => {
                 return {
                   ...prev,
-                  email: event.target.value,
+                  email: event.target.value
                 };
               });
             }}
@@ -105,7 +102,7 @@ const Signup = () => {
               setSignUp((prev) => {
                 return {
                   ...prev,
-                  password: event.target.value,
+                  password: event.target.value
                 };
               });
             }}
@@ -117,8 +114,7 @@ const Signup = () => {
 
           <button
             onClick={createAccount}
-            className="w-full text-center py-3 rounded bg-brand-3 text-white hover:bg-green-dark focus:outline-none my-1"
-          >
+            className="w-full text-center py-3 rounded bg-brand-3 text-white hover:bg-green-dark focus:outline-none my-1">
             Create Account
           </button>
 
@@ -126,7 +122,7 @@ const Signup = () => {
             By signing up, you agree to the
             <a className="no-underline ml-1" href="/">
               Terms of Service
-            </a>{" "}
+            </a>{' '}
             and
             <a className="no-underline ml-1" href="/">
               Privacy Policy

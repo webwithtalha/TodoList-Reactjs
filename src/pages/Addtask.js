@@ -1,11 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { MdDeleteForever } from "react-icons/md";
-import Header from "../components/Header";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { MdDeleteForever } from 'react-icons/md';
+import Header from '../components/Header';
 
 const Addtask = () => {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
+  const [newTask, setNewTask] = useState('');
 
   useEffect(() => {
     axios
@@ -26,7 +26,7 @@ const Addtask = () => {
         setTasks((prev) => {
           return [jsonRes.data.new_task, ...prev];
         });
-        setNewTask("");
+        setNewTask('');
       })
       .catch((err) => {
         console.log(err.response);
@@ -35,9 +35,7 @@ const Addtask = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/deleteTask/${id}`
-      );
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/deleteTask/${id}`);
       setTasks((prev) => {
         return prev.filter((obj) => {
           return obj._id !== id;
@@ -62,8 +60,7 @@ const Addtask = () => {
         />
         <button
           onClick={addTask}
-          className="py-[11px] px-5 flex bg-brand-4 w-fit text-sm text-white font-poppins rounded-lg"
-        >
+          className="py-[11px] px-5 flex bg-brand-4 w-fit text-sm text-white font-poppins rounded-lg">
           Add Task
         </button>
       </div>
