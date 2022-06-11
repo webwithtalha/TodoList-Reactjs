@@ -18,9 +18,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              Authenticated() ? <Addtask /> : isLoggedIn ? <Addtask /> : <Navigate to="/login" />
-            }
+            element={Authenticated() || isLoggedIn ? <Addtask /> : <Navigate to="/login" />}
           />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
