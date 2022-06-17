@@ -8,7 +8,7 @@ const Header = () => {
   const logoutUser = async () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`);
-      localStorage.removeItem('token');
+      localStorage.removeItem('jwtToken');
       router('/login');
     } catch (error) {
       console.log(error);

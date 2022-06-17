@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from '../utils/axios';
+// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import Header from '../components/Header';
@@ -11,17 +12,18 @@ const Addtask = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/getTask`)
       .then((jsonRes) => {
-        console.log(jsonRes);
         setTasks(jsonRes.data.tasks);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.error(err);
       });
   }, []);
 
   const addTask = () => {
+    console.log('addtask');
+
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api//addTask`, { task: newTask })
+      .post(`${process.env.REACT_APP_API_URL}/api/addTask`, { task: newTask })
       .then((jsonRes) => {
         setTasks((prev) => {
           return [jsonRes.data.new_task, ...prev];
@@ -29,7 +31,7 @@ const Addtask = () => {
         setNewTask('');
       })
       .catch((err) => {
-        console.log(err.response);
+        console.error(err);
       });
   };
 
@@ -69,7 +71,7 @@ const Addtask = () => {
           {tasks.length > 0 ? (
             tasks.map((t) => {
               return (
-                <div key={t}>
+                <div key={t.id}>
                   <p className="sm:w-[500px] xs:w-[300px] bg-brand-3 mb-3 bg-opacity-20 h-11 flex justify-between rounded text-brand-3 font-bold font-poppins p-2.5">
                     {t.task}
                     <MdDeleteForever
