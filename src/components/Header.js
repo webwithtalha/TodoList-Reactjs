@@ -2,13 +2,18 @@ import React from 'react';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const role = useSelector((state) => state.role);
+  console.log('role', role);
+
   const router = useNavigate();
+
   const logoutUser = async () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`);
-      localStorage.removeItem('jwtToken');
+      localStorage.removeItem('token');
       router('/login');
     } catch (error) {
       console.log(error);
@@ -42,7 +47,7 @@ const Header = () => {
                 </li>
                 <li>
                   <a className="hover:text-gray-200" href="/">
-                    Contact Us
+                    contact us
                   </a>
                 </li>
               </ul>

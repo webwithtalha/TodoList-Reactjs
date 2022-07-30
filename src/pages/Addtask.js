@@ -66,24 +66,24 @@ const Addtask = () => {
           Add Task
         </button>
       </div>
-      <div className="flex items-center justify-center mt-[3%]">
-        <div className="">
+      <div className="ml-12 mt-[3%]">
+        <div className="flex gap-10 flex-wrap w-full">
           {tasks.length > 0 ? (
             tasks.map((t) => {
               return (
                 <div key={t.id}>
-                  <p className="sm:w-[500px] xs:w-[300px] bg-brand-3 mb-3 bg-opacity-20 h-11 flex justify-between rounded text-brand-3 font-bold font-poppins p-2.5">
-                    {t.task}
+                  <p className="sm:w-[250px] xs:w-[200px] flex gap-2 justify-between bg-brand-3 mb-3 bg-opacity-20 h-36 rounded text-brand-3 font-bold font-poppins p-2.5">
+                    <div className="break-all flex flex-grow-1 w-fit">{t.task}</div>
                     <MdDeleteForever
                       onClick={() => deleteTask(t._id)}
-                      className="float-right text-red-600 text-[25px] hover:scale-125"
+                      className="w-fit min-w-[24px] text-red-600 text-[25px] hover:scale-125"
                     />
                   </p>
                 </div>
               );
             })
           ) : (
-            <div className="text-brand-3 text-[40px] font-poppins mt-10">
+            <div className="text-brand-3 text-[40px] flex justify-center font-poppins mt-10">
               No task will be added yet!
             </div>
           )}
