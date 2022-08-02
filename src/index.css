@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.inputPlaceHolder:empty:before {
+  content: attr(data-placeholder);
+  font-family: font-poppins;
+  color: #bebebe;
+}

@@ -9,7 +9,6 @@ import Addtask from './pages/Addtask';
 import { Authenticated } from './pages/isAuthenticated';
 
 function App() {
-  console.log(Authenticated());
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (

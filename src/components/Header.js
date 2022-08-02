@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const role = useSelector((state) => state.role);
-  console.log('role', role);
-
+  const [userData, setUserData] = useState([]);
   const router = useNavigate();
-
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/getMe`);
+        setUserData(res.data.user);
+        console.log('user data', res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
   const logoutUser = async () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`);
@@ -25,34 +32,35 @@ const Header = () => {
       <div className="flex flex-wrap min-w-screen">
         <section className="relative w-full ">
           <nav className="flex justify-between bg-brand-5 text-white ">
-            <div className="px-5 xl:px-12 py-6 flex w-full items-center">
+            <div className="justify-between px-5 xl:px-12 py-6 flex w-full items-center">
               <a className="text-3xl font-bold font-heading" href="/">
                 Todo List
               </a>
-              <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                <li>
-                  <a className="hover:text-gray-200" href="/">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-gray-200" href="/">
-                    Catagory
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-gray-200" href="/">
-                    Collections
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:text-gray-200" href="/">
-                    contact us
-                  </a>
-                </li>
-              </ul>
-              <div title="logout" className="hidden xl:flex items-center space-x-5">
-                <BiLogOutCircle onClick={logoutUser} className="text-[25px]" />
+              <div>
+                {' '}
+                <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+                  <li>
+                    <a className="hover:text-gray-200" href="/">
+                      Daily Task
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-gray-200" href="/">
+                      Paragraph
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-gray-200" href="/">
+                      Notes
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex gap-10 items-center">
+                <span className="font-poppins uppercase">{userData.name}</span>
+                <div title="logout" className="hidden xl:flex items-center space-x-5">
+                  <BiLogOutCircle onClick={logoutUser} className="text-[25px]" />
+                </div>
               </div>
             </div>
 
