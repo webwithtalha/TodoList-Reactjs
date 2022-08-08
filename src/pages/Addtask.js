@@ -2,11 +2,16 @@ import axios from '../utils/axios';
 // import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
 import Header from '../components/Header';
+import EditTaskPopup from '../components/EditTaskPopup';
+import { Link } from 'react-router-dom';
 
 const Addtask = () => {
   const inputTask = useRef();
+  const editedTask = useRef();
   const [tasks, setTasks] = useState([]);
+  const [showModel, setShowModel] = useState(false);
 
   useEffect(() => {
     axios
@@ -51,16 +56,6 @@ const Addtask = () => {
     <div className="w-full h-full">
       <Header />
       <div className="flex mx-10 md:flex-row xs:flex-col gap-3 items-center justify-center mt-10">
-        {/** <input
-          onChange={(event) => {
-            setNewTask(event.target.value);
-          }}
-          value={newTask}
-          maxLength={90}
-          type="text"
-          className="py-[11px] px-5 max-w-[700px] flex-grow outline-brand-5 font-poppins text-sm border-brand-5 border rounded-lg"
-        />
-        **/}
         <div
           ref={inputTask}
           contentEditable={true}
@@ -78,12 +73,19 @@ const Addtask = () => {
             tasks.map((t) => {
               return (
                 <div key={t.id}>
-                  <div className="sm:w-[250px] xs:w-[200px] flex gap-2 justify-between bg-brand-3 mb-3 bg-opacity-20 h-36 rounded text-brand-3 font-bold font-poppins p-2.5">
-                    <div className="break-all flex flex-grow-1 w-fit">{t.task}</div>
-                    <MdDeleteForever
-                      onClick={() => deleteTask(t._id)}
-                      className="w-fit min-w-[24px] text-red-600 text-[25px] hover:scale-125"
-                    />
+                  <div className="sm:w-[250px] xs:w-[200px] flex justify-between gap-2 bg-brand-3 mb-3 bg-opacity-20 h-36 rounded text-brand-3 font-bold font-poppins p-2.5">
+                    <div className="break-all flex max-h-[124px] scrollSet pr-1 overflow-y-scroll flex-grow-1 w-fit">
+                      {t.task}
+                    </div>
+                    <div className="flex gap-2">
+                      <MdDeleteForever
+                        onClick={() => deleteTask(t._id)}
+                        className=" min-w-[18px] text-red-600 text-[20px] hover:scale-125"
+                      />
+                      <Link to={`?id=${t._id}`} onClick={() => setShowModel(true)}>
+                        <BiEdit className=" min-w-[18px] text-red-600 text-[20px] hover:scale-125" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
@@ -95,6 +97,9 @@ const Addtask = () => {
           )}
         </div>
       </div>
+      {showModel && (
+        <EditTaskPopup setShowModel={setShowModel} editedTask={editedTask} setTasks={setTasks} />
+      )}
     </div>
   );
 };

@@ -7,3 +7,14 @@
   font-family: font-poppins;
   color: #bebebe;
 }
+
+.scrollSet::-webkit-scrollbar {
+  display: flex !important;
+  background-color: transparent !important;
+  width: 2px !important;
+  border-radius: 8px !important;
+}
+.scrollSet::-webkit-scrollbar-thumb {
+  background-color: #44a520 !important;
+  border-radius: 8px !important;
+}
