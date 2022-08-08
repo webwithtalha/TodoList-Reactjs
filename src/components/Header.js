@@ -11,7 +11,6 @@ const Header = () => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/getMe`);
         setUserData(res.data.user);
-        console.log('user data', res.data);
       } catch (error) {
         console.log(error);
       }
