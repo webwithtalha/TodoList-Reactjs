@@ -96,6 +96,7 @@ const Addtask = () => {
       <Header />
       <div className="flex mx-10 md:flex-row xs:flex-col gap-3 items-center justify-center mt-10">
         <div
+          title="you can add task with ctrl+enter"
           ref={inputTask}
           contentEditable={true}
           data-placeholder="Write a task..."

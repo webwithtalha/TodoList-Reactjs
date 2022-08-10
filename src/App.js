@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import { useSelector } from 'react-redux';
 import Addtask from './pages/Addtask';
 import { Authenticated } from './pages/isAuthenticated';
+import Paragraph from './pages/Paragraph';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -21,6 +22,7 @@ function App() {
           />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/paragraph" element={<Paragraph />} />
         </Routes>
       </Router>
       <ToastContainer />

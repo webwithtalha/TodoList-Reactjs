@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BiLogOutCircle } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Header = () => {
@@ -32,9 +32,11 @@ const Header = () => {
         <section className="relative w-full ">
           <nav className="flex justify-between bg-brand-5 text-white ">
             <div className="justify-between px-5 xl:px-12 py-6 flex w-full items-center">
-              <a className="text-3xl font-bold font-heading" href="/">
+              <Link to="/" className="text-3xl font-bold font-heading">
+                {' '}
                 Todo List
-              </a>
+              </Link>
+
               <div>
                 {' '}
                 <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
@@ -43,11 +45,9 @@ const Header = () => {
                       Daily Task
                     </a>
                   </li>
-                  <li>
-                    <a className="hover:text-gray-200" href="/">
-                      Paragraph
-                    </a>
-                  </li>
+                  <Link to="/paragraph" className="hover:text-gray-200">
+                    Paragraph
+                  </Link>
                   <li>
                     <a className="hover:text-gray-200" href="/">
                       Notes
